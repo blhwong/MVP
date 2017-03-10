@@ -20,7 +20,17 @@ var generateRandomString = function(length) {
 var stateKey = 'spotify_auth_state';
 
 app.get('/login', function(req, res) {
+  var scope = 'user-read-recently-played user-top-read';
   var state = generateRandomString(16);
+  res.cookie(stateKey, state);
+  var query = {
+    client_id: config.client_id,
+    response_type: 'code',
+    redirect_uri: config.redirect_uri,
+    state: state,
+    scope: scope
+  };
+  res.redirect('https://accounts.spotify.com/authorize?' + queryString.stringify(query));
 });
 
 app.get('/home', function(req, res) {
