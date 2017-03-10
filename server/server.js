@@ -3,6 +3,7 @@ var app = express();
 var config = require('../config/config');
 var queryString = require('query-string');
 var cookieParser = require('cookie-parser');
+var request = require('request');
 
 app.set('port', 3000);
 
@@ -42,14 +43,34 @@ app.get('/home', function(req, res) {
   var state = req.query.state;
   var error = req.query.error;
   var cookieState = req.cookies ? req.cookies[stateKey] : null;
-  console.log(cookieState, state);
-  if (state === null || cookieState !== state) {
+  if (!state || cookieState !== state) {
+    console.log('State mismatch!');
     res.redirect('/#' +
       queryString.stringify({
         error: 'state_mismatch'
       }));
   } else {
-    res.send('Logged in!');
+    // res.send('Logged in!');
+    console.log('Logged in!');
+    res.cookie(stateKey);
+    var options = {
+      url: 'https://accounts.spotify.com/api/token',
+      form: {
+        grant_type: 'authorization_code',
+        code: code,
+        redirect_uri: config.redirect_uri
+      },
+      headers: {
+        Authorization: 'Basic ' + (new Buffer(config.client_id + ':' + config.client_secret).toString('base64'))
+      }
+    };
+    request.post(options, function(err, res, body) {
+      if (err) {
+        throw err;
+      }
+      console.log('Post Success!');
+    });
+
   }
 
   // res.send('Logged in!');
