@@ -2,10 +2,14 @@ var express = require('express');
 var app = express();
 var config = require('../config/config');
 var queryString = require('query-string');
+var cookieParser = require('cookie-parser');
 
 app.set('port', 3000);
 
 app.use(express.static(__dirname + '/../client'));
+
+app.use(express.static(__dirname + '/public'))
+   .use(cookieParser());
 
 var generateRandomString = function(length) {
   var string = '';
@@ -34,7 +38,21 @@ app.get('/login', function(req, res) {
 });
 
 app.get('/home', function(req, res) {
-  res.send('Logged in!');
+  var code = req.query.code
+  var state = req.query.state;
+  var error = req.query.error;
+  var cookieState = req.cookies ? req.cookies[stateKey] : null;
+  console.log(cookieState, state);
+  if (state === null || cookieState !== state) {
+    res.redirect('/#' +
+      queryString.stringify({
+        error: 'state_mismatch'
+      }));
+  } else {
+    res.send('Logged in!');
+  }
+
+  // res.send('Logged in!');
 });
 
 if (!module.parent) {
