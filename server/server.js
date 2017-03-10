@@ -1,5 +1,6 @@
 var express = require('express');
 var app = express();
+var config = require('../config/config');
 
 app.set('port', 3000);
 
