@@ -3,10 +3,7 @@ var app = express();
 
 var PORT = 3000;
 
-app.get('/', function(req, res) {
-  res.send('Hello World!');
-});
-
+app.use(express.static(__dirname + '/../client'));
 
 app.listen(PORT, function() {
   console.log('Listening on port 3000!');
