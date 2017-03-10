@@ -1,0 +1,23 @@
+{
+  "name": "mvp",
+  "version": "1.0.0",
+  "description": "minimal viable product",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/blhwong/MVP.git"
+  },
+  "author": "Brandon Wong",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/blhwong/MVP/issues"
+  },
+  "homepage": "https://github.com/blhwong/MVP#readme",
+  "dependencies": {
+    "express": "^4.15.2",
+    "node": "0.0.0"
+  }
+}
