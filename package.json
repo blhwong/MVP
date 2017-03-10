@@ -4,7 +4,8 @@
   "description": "minimal viable product",
   "main": "index.js",
   "scripts": {
-    "test": "npm test"
+    "test": "npm test",
+    "start": "nodemon server/server.js"
   },
   "repository": {
     "type": "git",
@@ -18,6 +19,7 @@
   "homepage": "https://github.com/blhwong/MVP#readme",
   "dependencies": {
     "express": "^4.15.2",
-    "node": "0.0.0"
+    "node": "0.0.0",
+    "nodemon": "^1.11.0"
   }
 }
