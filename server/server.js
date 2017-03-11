@@ -8,7 +8,7 @@ var request = require('request');
 app.set('port', 3000);
 
 app.use('/', express.static(__dirname + '/../client'));
-app.use('/main', express.static(__dirname + '/../client'));
+// app.use('/main', express.static(__dirname + '/../client'));
 
 app.use(express.static(__dirname + '/public'))
   .use(cookieParser());
@@ -77,103 +77,109 @@ app.get('/home', function(req, res) {
         // var access_token = body.access_token;
         console.log(access_token);
         var type = 'artists';
-        url = 'https://api.spotify.com/v1/me/top/' + type;
-        options = {
-          url: url,
-          headers: {
-            Authorization: 'Bearer ' + access_token
-          },
-          qs: {
-            limit: 50,
-            time_range: 'long_term'
-          },
-          json: true
-        };
-        console.log(options.url);
-        request.get(options, function(err, response, body) {
-          if (!err && response.statusCode === 200) {
-            console.log('==========long term');
-            // console.log(body);
-          } else {
-            console.log('Error! ', err);
-          }
-        });
+        // url = 'https://api.spotify.com/v1/me/top/' + type;
+        // options = {
+        //   url: url,
+        //   headers: {
+        //     Authorization: 'Bearer ' + access_token
+        //   },
+        //   qs: {
+        //     limit: 50,
+        //     time_range: 'long_term'
+        //   },
+        //   json: true
+        // };
+        // console.log(options.url);
+        // request.get(options, function(err, response, body) {
+        //   if (!err && response.statusCode === 200) {
+        //     console.log('==========long term');
+        //     // console.log(body);
+        //   } else {
+        //     console.log('Error! ', err);
+        //   }
+        // });
 
-        // url = 'https://api.spotify.com/v1/me/top/' + type;
-        options.url = url;
-        options.qs.time_range = 'medium_term';
-        request.get(options, function(err, response, body) {
-          if (!err && response.statusCode === 200) {
-            console.log('==========medium term');
-            // console.log(body);
-          } else {
-            console.log('Error! ', err);
-          }
-        });
+        // // url = 'https://api.spotify.com/v1/me/top/' + type;
+        // options.url = url;
+        // options.qs.time_range = 'medium_term';
+        // request.get(options, function(err, response, body) {
+        //   if (!err && response.statusCode === 200) {
+        //     console.log('==========medium term');
+        //     // console.log(body);
+        //   } else {
+        //     console.log('Error! ', err);
+        //   }
+        // });
 
+        // // url = 'https://api.spotify.com/v1/me/top/' + type;
+        // options.url = url;
+        // options.qs.time_range = 'short_term';
+        // request.get(options, function(err, response, body) {
+        //   if (!err && response.statusCode === 200) {
+        //     console.log('==========short term');
+        //     // console.log(body);
+        //   } else {
+        //     console.log('Error! ', err);
+        //   }
+        // });
+        // type = 'tracks';
         // url = 'https://api.spotify.com/v1/me/top/' + type;
-        options.url = url;
-        options.qs.time_range = 'short_term';
-        request.get(options, function(err, response, body) {
-          if (!err && response.statusCode === 200) {
-            console.log('==========short term');
-            // console.log(body);
-          } else {
-            console.log('Error! ', err);
-          }
-        });
-        type = 'tracks';
-        url = 'https://api.spotify.com/v1/me/top/' + type;
-        options.url = url;
-        options.qs.time_range = 'long_term';
-        request.get(options, function(err, response, body) {
-          if (!err && response.statusCode === 200) {
-            console.log('==========long term');
-            // console.log(body);
-          } else {
-            console.log('Error! ', err);
-          }
-        });
-        // url = 'https://api.spotify.com/v1/me/top/' + type;
-        options.url = url;
-        options.qs.time_range = 'medium_term ';
-        request.get(options, function(err, response, body) {
-          if (!err && response.statusCode === 200) {
-            console.log('==========medium term');
-            // console.log(body);
-          } else {
-            console.log('Error! ', err);
-          }
-        });
-        // url = 'https://api.spotify.com/v1/me/top/' + type;
-        options.url = url;
-        options.qs.time_range = 'short_term';
-        request.get(options, function(err, response, body) {
-          if (!err && response.statusCode === 200) {
-            console.log('==========short term');
-            // console.log(body);
-          } else {
-            console.log('Error! ', err);
-          }
-        });
+        // options.url = url;
+        // options.qs.time_range = 'long_term';
+        // request.get(options, function(err, response, body) {
+        //   if (!err && response.statusCode === 200) {
+        //     console.log('==========long term');
+        //     // console.log(body);
+        //   } else {
+        //     console.log('Error! ', err);
+        //   }
+        // });
+        // // url = 'https://api.spotify.com/v1/me/top/' + type;
+        // options.url = url;
+        // options.qs.time_range = 'medium_term ';
+        // request.get(options, function(err, response, body) {
+        //   if (!err && response.statusCode === 200) {
+        //     console.log('==========medium term');
+        //     // console.log(body);
+        //   } else {
+        //     console.log('Error! ', err);
+        //   }
+        // });
+        // // url = 'https://api.spotify.com/v1/me/top/' + type;
+        // options.url = url;
+        // options.qs.time_range = 'short_term';
+        // request.get(options, function(err, response, body) {
+        //   if (!err && response.statusCode === 200) {
+        //     console.log('==========short term');
+        //     // console.log(body);
+        //   } else {
+        //     console.log('Error! ', err);
+        //   }
+        // });
 
         var currentOptions = {
           url: 'https://api.spotify.com/v1/me/player/recently-played',
           headers : {
             Authorization: 'Bearer ' + access_token
           },
-
+          qs: {
+            limit: 50
+          }
         };
         request.get(currentOptions, function(err, response, body) {
           console.log('================current');
-          // console.log(body);
+          console.log(body);
+          // res.send(JSON.stringify(body));
+          // res.send('');
+
+          // res.redirect('/main');
         });
 
-
-        res.redirect('/main#' + queryString.stringify({
-            access_token: access_token,
-            refresh_token: refresh_token
-          }));
+        // res.redirect('/main');
+        // res.redirect('/main#' + queryString.stringify({
+        //     access_token: access_token,
+        //     refresh_token: refresh_token
+        //   }));
       } else {
         res.redirect('/login#' + queryString.stringify({ error: 'invalid_token'}));
       }
@@ -183,6 +189,11 @@ app.get('/home', function(req, res) {
 
   // res.send('Logged in!');
 });
+
+// app.get('/main', function(req, res) {
+//   console.log('main');
+//   res.send('main');
+// });
 
 // app.get('/refresh_token', function(req, res) {
 //   console.log('in refresh token');
