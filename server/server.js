@@ -71,8 +71,35 @@ app.get('/home', function(req, res) {
         var access_token = body.access_token;
         var refresh_token = body.refresh_token;
         // console.log(access_token, refresh_token);
+        // console.log(access_token);
+        // console.log(refresh_token);
+        console.log(body);
+        // var access_token = body.access_token;
         console.log(access_token);
-        console.log(refresh_token);
+        var type = 'tracks';
+        options = {
+          url: 'https://api.spotify.com/v1/me/top/' + type,
+          headers: {
+            Authorization: 'Bearer ' + access_token
+          },
+          qs: {
+            limit: 50,
+            time_range: 'medium_term'
+          },
+          json: true
+        };
+        console.log(options.url);
+        request.get(options, function(err, response, body) {
+          // if (!err && response.statusCode === 200) {
+          //   console.log(body);
+          // } else {
+          //   console.log('Error! ', err);
+          // }
+          // console.log(body);
+          // console.log(response.statusCode);
+          // console.log(response);
+          console.log(body);
+        });
         res.redirect('/#' + queryString.stringify({
             access_token: access_token,
             refresh_token: refresh_token
@@ -87,29 +114,29 @@ app.get('/home', function(req, res) {
   // res.send('Logged in!');
 });
 
-app.get('/refresh_token', function(req, res) {
-  console.log('in refresh token');
-  // requesting access token from refresh token
-  var refresh_token = req.query.refresh_token;
-  var authOptions = {
-    url: 'https://accounts.spotify.com/api/token',
-    headers: { 'Authorization': 'Basic ' + (new Buffer(config.client_id + ':' + config.client_secret).toString('base64')) },
-    form: {
-      grant_type: 'refresh_token',
-      refresh_token: refresh_token
-    },
-    json: true
-  };
+// app.get('/refresh_token', function(req, res) {
+//   console.log('in refresh token');
+//   // requesting access token from refresh token
+//   var refresh_token = req.query.refresh_token;
+//   var authOptions = {
+//     url: 'https://accounts.spotify.com/api/token',
+//     headers: { 'Authorization': 'Basic ' + (new Buffer(config.client_id + ':' + config.client_secret).toString('base64')) },
+//     form: {
+//       grant_type: 'refresh_token',
+//       refresh_token: refresh_token
+//     },
+//     json: true
+//   };
 
-  request.post(authOptions, function(error, response, body) {
-    if (!error && response.statusCode === 200) {
-      var access_token = body.access_token;
-      res.send({
-        'access_token': access_token
-      });
-    }
-  });
-});
+//   request.post(authOptions, function(error, response, body) {
+//     if (!error && response.statusCode === 200) {
+//       var access_token = body.access_token;
+//       res.send({
+//         'access_token': access_token
+//       });
+//     }
+//   });
+// });
 
 if (!module.parent) {
   app.listen(app.get('port'));
