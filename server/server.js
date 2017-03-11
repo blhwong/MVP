@@ -10,7 +10,7 @@ app.set('port', 3000);
 app.use(express.static(__dirname + '/../client'));
 
 app.use(express.static(__dirname + '/public'))
-   .use(cookieParser());
+  .use(cookieParser());
 
 var generateRandomString = function(length) {
   var string = '';
@@ -23,6 +23,7 @@ var generateRandomString = function(length) {
 };
 
 var stateKey = 'spotify_auth_state';
+
 
 app.get('/login', function(req, res) {
   var scope = 'user-read-recently-played user-top-read';
@@ -45,10 +46,7 @@ app.get('/home', function(req, res) {
   var cookieState = req.cookies ? req.cookies[stateKey] : null;
   if (!state || cookieState !== state) {
     console.log('State mismatch!');
-    res.redirect('/#' +
-      queryString.stringify({
-        error: 'state_mismatch'
-      }));
+    res.redirect('/login#' + queryString.stringify({error: 'state_mismatch'}));
   } else {
     // res.send('Logged in!');
     console.log('Logged in!');
@@ -62,18 +60,55 @@ app.get('/home', function(req, res) {
       },
       headers: {
         Authorization: 'Basic ' + (new Buffer(config.client_id + ':' + config.client_secret).toString('base64'))
-      }
+      },
+      json: true
     };
-    request.post(options, function(err, res, body) {
-      if (err) {
-        throw err;
+    request.post(options, function(err, response, body) {
+       if (!err && res.statusCode === 200) {
+        console.log('Post Success!');
+        // console.log('============res', res);
+        // console.log('============body', res);
+        var access_token = body.access_token;
+        var refresh_token = body.refresh_token;
+        // console.log(access_token, refresh_token);
+        console.log(access_token);
+        console.log(refresh_token);
+        res.redirect('/#' + queryString.stringify({
+            access_token: access_token,
+            refresh_token: refresh_token
+          }));
+      } else {
+        res.redirect('/login#' + queryString.stringify({ error: 'invalid_token'}));
       }
-      console.log('Post Success!');
     });
 
   }
 
   // res.send('Logged in!');
+});
+
+app.get('/refresh_token', function(req, res) {
+  console.log('in refresh token');
+  // requesting access token from refresh token
+  var refresh_token = req.query.refresh_token;
+  var authOptions = {
+    url: 'https://accounts.spotify.com/api/token',
+    headers: { 'Authorization': 'Basic ' + (new Buffer(config.client_id + ':' + config.client_secret).toString('base64')) },
+    form: {
+      grant_type: 'refresh_token',
+      refresh_token: refresh_token
+    },
+    json: true
+  };
+
+  request.post(authOptions, function(error, response, body) {
+    if (!error && response.statusCode === 200) {
+      var access_token = body.access_token;
+      res.send({
+        'access_token': access_token
+      });
+    }
+  });
 });
 
 if (!module.parent) {
