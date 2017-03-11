@@ -7,7 +7,8 @@ var request = require('request');
 
 app.set('port', 3000);
 
-app.use(express.static(__dirname + '/../client'));
+app.use('/', express.static(__dirname + '/../client'));
+app.use('/main', express.static(__dirname + '/../client'));
 
 app.use(express.static(__dirname + '/public'))
   .use(cookieParser());
@@ -23,7 +24,6 @@ var generateRandomString = function(length) {
 };
 
 var stateKey = 'spotify_auth_state';
-
 
 app.get('/login', function(req, res) {
   var scope = 'user-read-recently-played user-top-read';
@@ -170,7 +170,7 @@ app.get('/home', function(req, res) {
         });
 
 
-        res.redirect('/#' + queryString.stringify({
+        res.redirect('/main#' + queryString.stringify({
             access_token: access_token,
             refresh_token: refresh_token
           }));
