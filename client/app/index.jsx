@@ -7,6 +7,9 @@ import List from './components/List.jsx';
 class App extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      listData: []
+    };
   }
 
   callSpotify() {
@@ -35,10 +38,14 @@ class App extends React.Component {
     });
   }
   render () {
-    return
+    return (
       <div>
         <a href='/login'>{window.location.hash.length > 0 && this.callSpotify()}Login</a>
-      </div>;
+        <div>
+          <List list={this.state.listData}/>
+        </div>
+      </div>
+    );
   }
 }
 
