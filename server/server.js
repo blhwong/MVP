@@ -26,7 +26,7 @@ var generateRandomString = function(length) {
 var stateKey = 'spotify_auth_state';
 
 app.get('/login', function(req, res) {
-  var scope = 'user-read-recently-played user-top-read';
+  var scope = 'user-read-recently-played user-top-read user-read-private user-read-birthdate user-read-email';
   var state = generateRandomString(16);
   res.cookie(stateKey, state);
   var query = {
@@ -176,7 +176,8 @@ app.get('/home', function(req, res) {
         // });
 
         // res.redirect('/main');
-        console.log(access_token);
+        console.log(req);
+        // console.log(access_token);
         res.redirect('/#' + queryString.stringify({
             access_token: access_token,
             refresh_token: refresh_token

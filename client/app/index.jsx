@@ -8,7 +8,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      listData: undefined
+      listData: undefined,
+      option: ''
     };
   }
 
@@ -45,6 +46,14 @@ class App extends React.Component {
     return (
       <div>
         <a href='/login'>{window.location.hash.length > 0 && this.callSpotify()}Login</a>
+        <a></a>
+        <a></a>
+        <a></a>
+        <a></a>
+        <a></a>
+        <a></a>
+        <input type="button"></input>
+        <h2>Your most recent tracks:</h2>
         <div>
           <List list={this.state.listData}/>
         </div>
