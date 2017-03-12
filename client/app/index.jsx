@@ -1,8 +1,13 @@
 import React from 'react';
 import {render} from 'react-dom';
 import $ from 'jquery';
+import List from './components/List.jsx';
+// import ListEntry from './ListEntry.jsx';
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+  }
 
   callSpotify() {
     var access_token = window.location.hash.split('=');
@@ -30,7 +35,10 @@ class App extends React.Component {
     });
   }
   render () {
-    return <a href='/login'>{window.location.hash.length > 0 && this.callSpotify()}Login</a>;
+    return
+      <div>
+        <a href='/login'>{window.location.hash.length > 0 && this.callSpotify()}Login</a>
+      </div>;
   }
 }
 
