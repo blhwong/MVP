@@ -157,29 +157,30 @@ app.get('/home', function(req, res) {
         //   }
         // });
 
-        var currentOptions = {
-          url: 'https://api.spotify.com/v1/me/player/recently-played',
-          headers : {
-            Authorization: 'Bearer ' + access_token
-          },
-          qs: {
-            limit: 50
-          }
-        };
-        request.get(currentOptions, function(err, response, body) {
-          console.log('================current');
-          console.log(body);
-          // res.send(JSON.stringify(body));
-          // res.send('');
-
-          // res.redirect('/main');
-        });
+        // var currentOptions = {
+        //   url: 'https://api.spotify.com/v1/me/player/recently-played',
+        //   headers : {
+        //     Authorization: 'Bearer ' + access_token
+        //   },
+        //   qs: {
+        //     limit: 50
+        //   }
+        // };
+        // request.get(currentOptions, function(err, response, body) {
+        //   console.log('================current');
+        //   console.log(body);
+        //   // res.send(JSON.stringify(body));
+        //   // res.send('');
+        //   // res.send(JSON.stringify(body));
+        //   // res.redirect('/main');
+        // });
 
         // res.redirect('/main');
-        // res.redirect('/main#' + queryString.stringify({
-        //     access_token: access_token,
-        //     refresh_token: refresh_token
-        //   }));
+        console.log(access_token);
+        res.redirect('/#' + queryString.stringify({
+            access_token: access_token,
+            refresh_token: refresh_token
+          }));
       } else {
         res.redirect('/login#' + queryString.stringify({ error: 'invalid_token'}));
       }
