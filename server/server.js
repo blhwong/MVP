@@ -192,6 +192,15 @@ app.get('/home', function(req, res) {
   // res.send('Logged in!');
 });
 
+app.get('/create', function(req, res) {
+  // request for current userprofile using web api
+  // create profile
+});
+
+app.get('insert', function(req, res) {
+  // insert to db
+});
+
 // app.get('/main', function(req, res) {
 //   console.log('main');
 //   res.send('main');

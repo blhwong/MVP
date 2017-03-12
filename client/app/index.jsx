@@ -9,7 +9,8 @@ class App extends React.Component {
     super(props);
     this.state = {
       listData: undefined,
-      option: ''
+      option: '',
+      username: undefined
     };
   }
 
@@ -35,6 +36,9 @@ class App extends React.Component {
           console.log('success!');
           console.log(data);
           app.setState({listData: data.items});
+          // do i have username?
+            // no call endpoint to receive current user profile and create profile in db
+          // call another endpoint to insert info to db from either username in state
         },
         error: function() {
           console.log('fail');
