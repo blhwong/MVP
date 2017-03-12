@@ -4,7 +4,7 @@ import ListEntry from './ListEntry.jsx';
 var List = (props) => {
   return (
     <div>
-      {props.list && props.list.map(listEntry => <ListEntry entry={listEntry}/>)}
+      {props.list && props.list.map(listEntry => <ListEntry entry={listEntry} option={props.option}/>)}
     </div>
     );
 };

@@ -68,12 +68,20 @@ class App extends React.Component {
         success: function(data) {
           console.log('success!');
           console.log(data);
-          app.setState({listData: data.items});
-          if (!app.state.access_token) {
-            console.log('state', app.state)
-            app.setState({access_token: access_token});
-          }
-          app.setState({option: option});
+
+          app.setState({
+            listData: data.items,
+            access_token: access_token,
+            option: option
+          });
+
+
+          // app.setState({listData: data.items});
+          // if (!app.state.access_token) {
+          //   console.log('state', app.state)
+          //   app.setState({access_token: access_token});
+          // }
+          // app.setState({option: option});
           if (window.location.hash.length > 0) {
             window.location.hash = '';
           }
@@ -98,30 +106,29 @@ class App extends React.Component {
           <a href='/login'>{window.location.hash.length > 0 && this.callSpotify()}Login</a>
         </div>
         <div>
-          {/*<a href='/' onClick={this.state.access_token && this.callSpotify('Your most recently played:')}>Your most recently played:</a>*/}
           <a onClick={this.onClick.bind(this)}>Your most recently played</a>
         </div>
         <div>
-        <a onClick={this.onClick.bind(this)}>Your Top Artists (Over several years)</a>
-        </div>
-        {/*<div>
-          <a href='/'>{this.state.access_token && this.callSpotify('Your Top Tracks (Over several years):')}Your Top Tracks (Over several years):</a>
+          <a onClick={this.onClick.bind(this)}>Your Top Artists (Over several years)</a>
         </div>
         <div>
-          <a href='/'>{this.state.access_token && this.callSpotify('Your Top Artists (Over last 6 months):')}Your Top Artists (Over last 6 months):</a>
+          <a onClick={this.onClick.bind(this)}>Your Top Tracks (Over several years):</a>
         </div>
         <div>
-          <a href='/'>{this.state.access_token && this.callSpotify('Your Top Tracks (Over last 6 months):')}Your Top Tracks (Over last 6 months):</a>
+          <a onClick={this.onClick.bind(this)}>Your Top Artists (Over last 6 months):</a>
         </div>
         <div>
-          <a href='/'>{this.state.access_token && this.callSpotify('Your Top Artists (Over last 4 weeks):')}Your Top Artists (Over last 4 weeks):</a>
+          <a onClick={this.onClick.bind(this)}>Your Top Tracks (Over last 6 months):</a>
         </div>
         <div>
-          <a href='/'>{this.state.access_token && this.callSpotify('Your Top Tracks (Over last 4 weeks):')}Your Top Tracks (Over last 4 weeks):</a>
-        </div>*/}
+          <a onClick={this.onClick.bind(this)}>Your Top Artists (Over last 4 weeks):</a>
+        </div>
+        <div>
+          <a onClick={this.onClick.bind(this)}>Your Top Tracks (Over last 4 weeks):</a>
+        </div>
         <h2>{this.state.option}</h2>
         <div>
-          <List list={this.state.listData}/>
+          <List list={this.state.listData} option={this.state.option}/>
         </div>
       </div>
     );
