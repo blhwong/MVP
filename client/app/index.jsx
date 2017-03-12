@@ -16,14 +16,21 @@ class App extends React.Component {
   }
 
   callSpotify(option = 'Your most recently played:') {
+    debugger;
     console.log('hello', !this.state.listData);
 
     if (!this.state.listData || this.state.option !== option) {
       console.log('calling spotify');
       var app = this;
-      var access_token = window.location.hash.split('=');
-      access_token = access_token[1].split('&refresh_token');
-      access_token = access_token[0];
+      var access_token;
+      if (!this.state.access_token) {
+        access_token = window.location.hash.split('=');
+        access_token = access_token[1].split('&refresh_token');
+        access_token = access_token[0];
+
+      } else {
+        access_token = this.state.access_token;
+      }
       var url;
       var data = {
         limit: 50
@@ -64,9 +71,12 @@ class App extends React.Component {
           app.setState({listData: data.items});
           if (!app.state.access_token) {
             console.log('state', app.state)
-            // app.setState({access_token: access_token});
+            app.setState({access_token: access_token});
           }
           app.setState({option: option});
+          if (window.location.hash.length > 0) {
+            window.location.hash = '';
+          }
           // do i have username?
             // no call endpoint to receive current user profile and create profile in db
           // call another endpoint to insert info to db from either username in state
@@ -77,6 +87,10 @@ class App extends React.Component {
       });
     }
   }
+  onClick(event) {
+    console.log('click', event, this.state.access_token);
+    this.callSpotify(event.target.innerHTML + ':');
+  }
   render () {
     return (
       <div>
@@ -84,12 +98,13 @@ class App extends React.Component {
           <a href='/login'>{window.location.hash.length > 0 && this.callSpotify()}Login</a>
         </div>
         <div>
-          <a href='/' onclick="return false">{this.state.access_token && this.callSpotify('Your most recently played:')}Your most recently played:</a>
+          {/*<a href='/' onClick={this.state.access_token && this.callSpotify('Your most recently played:')}>Your most recently played:</a>*/}
+          <a onClick={this.onClick.bind(this)}>Your most recently played</a>
         </div>
         <div>
-        <a href='/' onclick="return false">{this.state.access_token && this.callSpotify('Your Top Artists (Over several years):')}Your Top Artists (Over several years):</a>
+        <a onClick={this.onClick.bind(this)}>Your Top Artists (Over several years)</a>
         </div>
-        <div>
+        {/*<div>
           <a href='/'>{this.state.access_token && this.callSpotify('Your Top Tracks (Over several years):')}Your Top Tracks (Over several years):</a>
         </div>
         <div>
@@ -103,7 +118,7 @@ class App extends React.Component {
         </div>
         <div>
           <a href='/'>{this.state.access_token && this.callSpotify('Your Top Tracks (Over last 4 weeks):')}Your Top Tracks (Over last 4 weeks):</a>
-        </div>
+        </div>*/}
         <h2>{this.state.option}</h2>
         <div>
           <List list={this.state.listData}/>
