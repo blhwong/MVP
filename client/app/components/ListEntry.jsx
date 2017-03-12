@@ -2,7 +2,9 @@ import React from 'react';
 
 var ListEntry = (props) => {
   return (
-    <div> </div>
+    <div>
+      {console.log(props)}
+    </div>
     );
 
 };

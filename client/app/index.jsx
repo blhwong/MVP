@@ -32,7 +32,8 @@ class App extends React.Component {
         },
         success: function(data) {
           console.log('success!');
-          app.setState({listData: data});
+          console.log(data);
+          app.setState({listData: data.items});
         },
         error: function() {
           console.log('fail');
