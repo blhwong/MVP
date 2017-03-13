@@ -16,7 +16,6 @@ class App extends React.Component {
   }
 
   callSpotify(option = 'Your most recently played:') {
-    debugger;
     console.log('hello', !this.state.listData);
 
     if (!this.state.listData || this.state.option !== option) {
@@ -112,19 +111,19 @@ class App extends React.Component {
           <a onClick={this.onClick.bind(this)}>Your Top Artists (Over several years)</a>
         </div>
         <div>
-          <a onClick={this.onClick.bind(this)}>Your Top Tracks (Over several years):</a>
+          <a onClick={this.onClick.bind(this)}>Your Top Tracks (Over several years)</a>
         </div>
         <div>
-          <a onClick={this.onClick.bind(this)}>Your Top Artists (Over last 6 months):</a>
+          <a onClick={this.onClick.bind(this)}>Your Top Artists (Over last 6 months)</a>
         </div>
         <div>
-          <a onClick={this.onClick.bind(this)}>Your Top Tracks (Over last 6 months):</a>
+          <a onClick={this.onClick.bind(this)}>Your Top Tracks (Over last 6 months)</a>
         </div>
         <div>
-          <a onClick={this.onClick.bind(this)}>Your Top Artists (Over last 4 weeks):</a>
+          <a onClick={this.onClick.bind(this)}>Your Top Artists (Over last 4 weeks)</a>
         </div>
         <div>
-          <a onClick={this.onClick.bind(this)}>Your Top Tracks (Over last 4 weeks):</a>
+          <a onClick={this.onClick.bind(this)}>Your Top Tracks (Over last 4 weeks)</a>
         </div>
         <h2>{this.state.option}</h2>
         <div>

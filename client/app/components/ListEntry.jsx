@@ -1,33 +1,28 @@
 import React from 'react';
 
 var ListEntry = (props) => {
-  console.log('option', props.option);
-  debugger;
-  if (props.option === 'Your Top Artists (Over several years):') {
+  console.log('option', props.option.slice(9,10));
+  if (props.option.slice(9, 10) === 'A') {
     return (
-      <div>{props.entry.name}
-        <img src={props.entry.images[2].url}></img>
+      <div>
+        <div>
+          {props.entry.name}
+        </div>
+        <div>
+          <img src={props.entry.images[2].url}></img>
+        </div>
       </div>
     );
-  } else if (props.option === 'Your Top Tracks (Over several years):') {
+  } else if (props.option.slice(9,10) === 'T') {
     return (
-      <div></div>
-    );
-  } else if (props.option === 'Your Top Artists (Over last 6 months):') {
-    return (
-      <div>Artists</div>
-    );
-  } else if (props.option === 'Your Top Tracks (Over last 6 months):') {
-    return (
-      <div></div>
-    );
-  } else if (props.option === 'Your Top Artists (Over last 4 weeks):') {
-    return (
-      <div>Artists</div>
-    );
-  } else if (props.option === 'Your Top Tracks (Over last 4 weeks):') {
-    return (
-      <div></div>
+      <div>
+        <div>
+          <img src={props.entry.album.images[2].url}></img>
+        </div>
+        <div>
+          {props.entry.artists[0].name} - {props.entry.name}
+        </div>
+      </div>
     );
   } else {
     return (
