@@ -8,7 +8,6 @@ var request = require('request');
 app.set('port', 3000);
 
 app.use('/', express.static(__dirname + '/../client'));
-// app.use('/main', express.static(__dirname + '/../client'));
 
 app.use(express.static(__dirname + '/public'))
   .use(cookieParser());
@@ -48,7 +47,6 @@ app.get('/home', function(req, res) {
     console.log('State mismatch!');
     res.redirect('/login#' + queryString.stringify({error: 'state_mismatch'}));
   } else {
-    // res.send('Logged in!');
     console.log('Logged in!');
     res.cookie(stateKey);
     var options = {
@@ -66,118 +64,8 @@ app.get('/home', function(req, res) {
     request.post(options, function(err, response, body) {
        if (!err && res.statusCode === 200) {
         console.log('Post Success!');
-        // console.log('============res', res);
-        // console.log('============body', res);
         var access_token = body.access_token;
         var refresh_token = body.refresh_token;
-        // console.log(access_token, refresh_token);
-        // console.log(access_token);
-        // console.log(refresh_token);
-        console.log(body);
-        // var access_token = body.access_token;
-        console.log(access_token);
-        var type = 'artists';
-        // url = 'https://api.spotify.com/v1/me/top/' + type;
-        // options = {
-        //   url: url,
-        //   headers: {
-        //     Authorization: 'Bearer ' + access_token
-        //   },
-        //   qs: {
-        //     limit: 50,
-        //     time_range: 'long_term'
-        //   },
-        //   json: true
-        // };
-        // console.log(options.url);
-        // request.get(options, function(err, response, body) {
-        //   if (!err && response.statusCode === 200) {
-        //     console.log('==========long term');
-        //     // console.log(body);
-        //   } else {
-        //     console.log('Error! ', err);
-        //   }
-        // });
-
-        // // url = 'https://api.spotify.com/v1/me/top/' + type;
-        // options.url = url;
-        // options.qs.time_range = 'medium_term';
-        // request.get(options, function(err, response, body) {
-        //   if (!err && response.statusCode === 200) {
-        //     console.log('==========medium term');
-        //     // console.log(body);
-        //   } else {
-        //     console.log('Error! ', err);
-        //   }
-        // });
-
-        // // url = 'https://api.spotify.com/v1/me/top/' + type;
-        // options.url = url;
-        // options.qs.time_range = 'short_term';
-        // request.get(options, function(err, response, body) {
-        //   if (!err && response.statusCode === 200) {
-        //     console.log('==========short term');
-        //     // console.log(body);
-        //   } else {
-        //     console.log('Error! ', err);
-        //   }
-        // });
-        // type = 'tracks';
-        // url = 'https://api.spotify.com/v1/me/top/' + type;
-        // options.url = url;
-        // options.qs.time_range = 'long_term';
-        // request.get(options, function(err, response, body) {
-        //   if (!err && response.statusCode === 200) {
-        //     console.log('==========long term');
-        //     // console.log(body);
-        //   } else {
-        //     console.log('Error! ', err);
-        //   }
-        // });
-        // // url = 'https://api.spotify.com/v1/me/top/' + type;
-        // options.url = url;
-        // options.qs.time_range = 'medium_term ';
-        // request.get(options, function(err, response, body) {
-        //   if (!err && response.statusCode === 200) {
-        //     console.log('==========medium term');
-        //     // console.log(body);
-        //   } else {
-        //     console.log('Error! ', err);
-        //   }
-        // });
-        // // url = 'https://api.spotify.com/v1/me/top/' + type;
-        // options.url = url;
-        // options.qs.time_range = 'short_term';
-        // request.get(options, function(err, response, body) {
-        //   if (!err && response.statusCode === 200) {
-        //     console.log('==========short term');
-        //     // console.log(body);
-        //   } else {
-        //     console.log('Error! ', err);
-        //   }
-        // });
-
-        // var currentOptions = {
-        //   url: 'https://api.spotify.com/v1/me/player/recently-played',
-        //   headers : {
-        //     Authorization: 'Bearer ' + access_token
-        //   },
-        //   qs: {
-        //     limit: 50
-        //   }
-        // };
-        // request.get(currentOptions, function(err, response, body) {
-        //   console.log('================current');
-        //   console.log(body);
-        //   // res.send(JSON.stringify(body));
-        //   // res.send('');
-        //   // res.send(JSON.stringify(body));
-        //   // res.redirect('/main');
-        // });
-
-        // res.redirect('/main');
-        console.log(req);
-        // console.log(access_token);
         res.redirect('/#' + queryString.stringify({
             access_token: access_token,
             refresh_token: refresh_token
@@ -186,10 +74,7 @@ app.get('/home', function(req, res) {
         res.redirect('/login#' + queryString.stringify({ error: 'invalid_token'}));
       }
     });
-
   }
-
-  // res.send('Logged in!');
 });
 
 app.get('/create', function(req, res) {
@@ -200,35 +85,6 @@ app.get('/create', function(req, res) {
 app.get('insert', function(req, res) {
   // insert to db
 });
-
-// app.get('/main', function(req, res) {
-//   console.log('main');
-//   res.send('main');
-// });
-
-// app.get('/refresh_token', function(req, res) {
-//   console.log('in refresh token');
-//   // requesting access token from refresh token
-//   var refresh_token = req.query.refresh_token;
-//   var authOptions = {
-//     url: 'https://accounts.spotify.com/api/token',
-//     headers: { 'Authorization': 'Basic ' + (new Buffer(config.client_id + ':' + config.client_secret).toString('base64')) },
-//     form: {
-//       grant_type: 'refresh_token',
-//       refresh_token: refresh_token
-//     },
-//     json: true
-//   };
-
-//   request.post(authOptions, function(error, response, body) {
-//     if (!error && response.statusCode === 200) {
-//       var access_token = body.access_token;
-//       res.send({
-//         'access_token': access_token
-//       });
-//     }
-//   });
-// });
 
 if (!module.parent) {
   app.listen(app.get('port'));

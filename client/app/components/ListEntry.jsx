@@ -1,7 +1,6 @@
 import React from 'react';
 
 var ListEntry = (props) => {
-  console.log('option', props.option.slice(9,10));
   if (props.option.slice(9, 10) === 'A') {
     return (
       <div>
