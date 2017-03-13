@@ -4,9 +4,17 @@ var config = require('../config/config');
 var queryString = require('query-string');
 var cookieParser = require('cookie-parser');
 var request = require('request');
+var bodyParser = require('body-parser');
+var db = require('./db/index');
+var bodyEntry = db.bodyEntry;
 
 app.set('port', 3000);
 
+
+// app.use(bodyParser.json({limit: '2mb'}));
+// app.use(bodyParser.urlencoded({limit: '2mb', extended: true}));
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/', express.static(__dirname + '/../client'));
 
 app.use(express.static(__dirname + '/public'))
@@ -94,13 +102,30 @@ app.get('/home', function(req, res) {
   }
 });
 
-app.get('/create', function(req, res) {
-  // request for current userprofile using web api
-  // create profile
-});
+// app.get('/create', function(req, res) {
+//   // request for current userprofile using web api
+//   // create profile
+// });
 
-app.get('insert', function(req, res) {
+app.post('/insert', function(req, res) {
   // insert to db
+  // console.log(req);
+  // var body = [];
+  // req.on('data', function(data) {
+  //   // console.log(data.toString());
+  //   body.push(data);
+  // })
+  // .on('end', function() {
+  //   // console.log(body.toString());
+  //   body = Buffer.concat(body).toString();
+  //   console.log(body);
+  // });
+
+  // bodyEntry.create({user})
+  // console.log(req.body.username);
+  bodyEntry.create({username: 'blhwong', body: 'hi'}, function(err) {
+    res.sendStatus(201);
+  });
 });
 
 if (!module.parent) {

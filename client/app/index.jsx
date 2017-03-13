@@ -73,6 +73,22 @@ class App extends React.Component {
           if (window.location.hash.length > 0) {
             window.location.hash = '';
           }
+          console.log(JSON.stringify(data.items));
+          $.ajax({
+            url: '/insert',
+            type: 'POST',
+            contentType: 'application/json',
+            data: {
+              username: app.state.username
+            },
+            success: function(data) {
+              console.log('Success post!');
+            },
+            error: function() {
+              console.log('Failed post...');
+            }
+          });
+
           // do i have username?
             // no call endpoint to receive current user profile and create profile in db
           // call another endpoint to insert info to db from either username in state
