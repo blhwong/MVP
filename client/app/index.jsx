@@ -16,17 +16,13 @@ class App extends React.Component {
   }
 
   callSpotify(option = 'Your most recently played:') {
-    console.log('hello', !this.state.listData);
-
     if (!this.state.listData || this.state.option !== option) {
-      console.log('calling spotify');
       var app = this;
       var access_token;
       if (!this.state.access_token) {
         access_token = window.location.hash.split('=');
         access_token = access_token[1].split('&refresh_token');
         access_token = access_token[0];
-
       } else {
         access_token = this.state.access_token;
       }
@@ -65,22 +61,12 @@ class App extends React.Component {
         },
         data: data,
         success: function(data) {
-          console.log('success!');
-          console.log(data);
-
+          console.log('Success!');
           app.setState({
             listData: data.items,
             access_token: access_token,
             option: option
           });
-
-
-          // app.setState({listData: data.items});
-          // if (!app.state.access_token) {
-          //   console.log('state', app.state)
-          //   app.setState({access_token: access_token});
-          // }
-          // app.setState({option: option});
           if (window.location.hash.length > 0) {
             window.location.hash = '';
           }
@@ -89,13 +75,12 @@ class App extends React.Component {
           // call another endpoint to insert info to db from either username in state
         },
         error: function() {
-          console.log('fail');
+          console.log('Error...');
         }
       });
     }
   }
   onClick(event) {
-    console.log('click', event, this.state.access_token);
     this.callSpotify(event.target.innerHTML + ':');
   }
   render () {
