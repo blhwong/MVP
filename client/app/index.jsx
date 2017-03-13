@@ -79,7 +79,8 @@ class App extends React.Component {
             type: 'POST',
             contentType: 'application/json',
             data: {
-              username: app.state.username
+              username: app.state.username,
+              body: data.items
             },
             success: function(data) {
               console.log('Success post!');

@@ -110,22 +110,19 @@ app.get('/home', function(req, res) {
 app.post('/insert', function(req, res) {
   // insert to db
   // console.log(req);
-  // var body = [];
-  // req.on('data', function(data) {
-  //   // console.log(data.toString());
-  //   body.push(data);
-  // })
-  // .on('end', function() {
-  //   // console.log(body.toString());
-  //   body = Buffer.concat(body).toString();
-  //   console.log(body);
-  // });
-
-  // bodyEntry.create({user})
-  // console.log(req.body.username);
-  bodyEntry.create({username: 'blhwong', body: 'hi'}, function(err) {
-    res.sendStatus(201);
+  var body = [];
+  req.on('data', function(data) {
+    // console.log(data.toString());
+    body.push(data);
+  })
+  .on('end', function() {
+    // console.log(body.toString());
+    body = Buffer.concat(body).toString();
   });
+
+  // bodyEntry.create({username: 'blhwong', body: 'hi'}, function(err) {
+  //   res.sendStatus(201);
+  // });
 });
 
 if (!module.parent) {
