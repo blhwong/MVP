@@ -3,15 +3,15 @@ mongoose.connect('mongodb://localhost/spotify');
 
 var db = mongoose.connection;
 
-var listEntry = mongoose.Schema({
-  artist: String,
-  track: String,
+var bodyEntry = mongoose.Schema({
+  username: String,
+  body: String,
   date: {type: Date, default: Date.now}
 });
 
-var listEntry = mongoose.model('listEntry', listEntry);
+var bodyEntry = mongoose.model('bodyEntry', bodyEntry);
 
 module.exports = {
   db: db,
-  listEntry: listEntry
+  bodyEntry: bodyEntry
 };

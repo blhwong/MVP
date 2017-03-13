@@ -76,8 +76,6 @@ app.get('/home', function(req, res) {
         };
         request.get(currentUserOptions, function(err, response, body) {
           if (!err && res.statusCode === 200) {
-            console.log('body', body);
-            var username = body.id;
             res.redirect('/#' + queryString.stringify({
               access_token: access_token,
               refresh_token: refresh_token,

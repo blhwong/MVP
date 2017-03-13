@@ -19,8 +19,10 @@ class App extends React.Component {
     if (!this.state.listData || this.state.option !== option) {
       var app = this;
       var access_token;
+      var username;
       if (!this.state.access_token) {
         access_token = window.location.hash.split('=');
+        username = access_token[3];
         access_token = access_token[1].split('&refresh_token');
         access_token = access_token[0];
       } else {
@@ -65,7 +67,8 @@ class App extends React.Component {
           app.setState({
             listData: data.items,
             access_token: access_token,
-            option: option
+            option: option,
+            username: username
           });
           if (window.location.hash.length > 0) {
             window.location.hash = '';
