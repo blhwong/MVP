@@ -35,3 +35,5 @@ bower_components/
 .flooignore
 
 config/config.js
+
+./client/public/bundle.js
